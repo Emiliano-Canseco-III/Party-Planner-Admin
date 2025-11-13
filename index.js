@@ -230,6 +230,7 @@ function render() {
     <main>
       <section>
         <h2>Upcoming Parties</h2>
+        <PartyForm></PartyForm>
         <PartyList></PartyList>
       </section>
       <section id="selected">
@@ -241,6 +242,7 @@ function render() {
 
   $app.querySelector("PartyList").replaceWith(PartyList());
   $app.querySelector("SelectedParty").replaceWith(SelectedParty());
+  $app.querySelector("PartyForm").replaceWith(PartyForm());
 }
 
 async function init() {
