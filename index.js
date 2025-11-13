@@ -1,6 +1,6 @@
 // === Constants ===
 const BASE = "https://fsa-crud-2aa9294fe819.herokuapp.com/api";
-const COHORT = "/2509-FTB-CT-WEB-PT"; // Make sure to change this!
+const COHORT = "/2509-FTB-CT-WEB-PT";
 const API = BASE + COHORT;
 
 // === State ===
@@ -87,6 +87,51 @@ function PartyListItem(party) {
   `;
   $li.addEventListener("click", () => getParty(party.id));
   return $li;
+}
+
+function PartyForm() {
+  const $form = document.createElement("form");
+  $form.innerHTML = `
+  <h3>Create a New Party</h3>
+
+  <label>
+    Name:
+    <input name = "name" required />
+  </label>
+  
+  <label>
+    Description:
+    <input name = "description" required />
+  </label>
+
+  <label>
+    Date:
+    <input type = "datetime-local" name = "date" required />
+  </label>
+  
+  <label>
+    Location:
+    <input name = "location" required />
+  </label>
+  <button type = "submit">Create Party</button>
+  `;
+
+  $form.addEventListener("submit", async (event) => {
+    event.preventDefault();
+
+    const formData = new FormData($form);
+    const newParty = {
+      name: formData.get("name"),
+      description: formData.get("description"),
+      date: formData.get("date"),
+      location: formData.get("location"),
+    };
+
+    await createparty(newParty);
+    $form.reset();
+  });
+
+  return $form;
 }
 
 /** A list of names of all parties */
