@@ -57,21 +57,6 @@ async function getGuests() {
   }
 }
 
-async function createparty(partyData) {
-  try {
-    const response = await fetch(API + "/events", {
-      method: "POST",
-      headers: { "Content-type": "application/json" },
-      body: JSON.stringify(partyData),
-    });
-    const result = await response.json();
-    // Refresh
-    await getParties();
-  } catch (e) {
-    console.error(e);
-  }
-}
-
 async function createParty(party) {
   try {
     const response = await fetch(API + "/events", {
