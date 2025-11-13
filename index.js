@@ -1,6 +1,6 @@
 // === Constants ===
 const BASE = "https://fsa-crud-2aa9294fe819.herokuapp.com/api";
-const COHORT = "2509-FTB-CT-WEB-PT";
+const COHORT = "/2509-FTB-CT-WEB-PT";
 const API = BASE + COHORT;
 
 // === State ===
@@ -64,6 +64,7 @@ async function createParty(party) {
       headers: { "Content-type": "application/json" },
       body: JSON.stringify(party),
     });
+
     const result = await response.json();
     console.log("Party created!", result);
     await getParties();
