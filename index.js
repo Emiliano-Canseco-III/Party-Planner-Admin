@@ -65,7 +65,7 @@ async function createParty(party) {
       body: JSON.stringify(party),
     });
     const result = await response.json();
-    console.log("Party created!".result);
+    console.log("Party created!", result);
     await getParties();
     render();
   } catch (e) {
@@ -138,7 +138,7 @@ function PartyForm() {
       location: formData.get("location"),
     };
 
-    await createparty(newParty);
+    await createParty(newParty);
     $form.reset();
   });
 
@@ -162,13 +162,6 @@ function SelectedParty() {
     const $p = document.createElement("p");
     $p.textContent = "Please select a party to learn more.";
 
-    const $deleteBtn = document.createElement("button");
-    $deleteBtn.textContent = "Delete Party";
-    $deleteBtn.addEventListener("click", async () => {
-      await deleteParty(selectedParty.id);
-    });
-
-    $party.appendChild($deleteBtn);
     return $p;
   }
 
@@ -183,6 +176,13 @@ function SelectedParty() {
     <GuestList></GuestList>
   `;
   $party.querySelector("GuestList").replaceWith(GuestList());
+
+  const $deleteBtn = document.createElement("button");
+  $deleteBtn.textContent = "Delete Party";
+  $deleteBtn.addEventListener("click", async () => {
+    await deleteParty(selectedParty.id);
+  });
+  $party.appendChild($deleteBtn);
 
   return $party;
 }
