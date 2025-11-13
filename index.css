@@ -53,3 +53,8 @@ form {
 label {
   display: grid;
 }
+
+button:hover {
+  cursor: pointer;
+  background: #eee;
+}
