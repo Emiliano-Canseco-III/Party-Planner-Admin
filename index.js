@@ -1,6 +1,6 @@
 // === Constants ===
 const BASE = "https://fsa-crud-2aa9294fe819.herokuapp.com/api";
-const COHORT = ""; // Make sure to change this!
+const COHORT = "/2509-FTB-CT-WEB-PT"; // Make sure to change this!
 const API = BASE + COHORT;
 
 // === State ===
@@ -52,6 +52,21 @@ async function getGuests() {
     const result = await response.json();
     guests = result.data;
     render();
+  } catch (e) {
+    console.error(e);
+  }
+}
+
+async function createparty(partyData) {
+  try {
+    const response = await fetch(API + "/events", {
+      method: "POST",
+      headers: { "Content-type": "application/json" },
+      body: JSON.stringify(partyData),
+    });
+    const result = await response.json();
+    // Refresh
+    await getParties();
   } catch (e) {
     console.error(e);
   }
