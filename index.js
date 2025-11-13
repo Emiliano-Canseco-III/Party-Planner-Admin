@@ -1,6 +1,6 @@
 // === Constants ===
 const BASE = "https://fsa-crud-2aa9294fe819.herokuapp.com/api";
-const COHORT = "/2509-FTB-CT-WEB-PT";
+const COHORT = "2509-FTB-CT-WEB-PT";
 const API = BASE + COHORT;
 
 // === State ===
@@ -186,6 +186,7 @@ function SelectedParty() {
 
   return $party;
 }
+console.log(API);
 
 /** List of guests attending the selected party */
 function GuestList() {
