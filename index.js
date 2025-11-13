@@ -72,6 +72,32 @@ async function createparty(partyData) {
   }
 }
 
+async function createParty(party) {
+  try {
+    const response = await fetch(API + "/events", {
+      method: "POST",
+      headers: { "Content-type": "application/json" },
+      body: JSON.stringify(party),
+    });
+    const result = await response.json();
+    console.log("Party created!".result);
+    await getParties();
+    render();
+  } catch (e) {
+    console.error(e);
+  }
+}
+
+async function deleteParty(id) {
+  try {
+    await fetch(API + "/events/" + id, { method: "DELETE" });
+    selectedParty = null;
+    await getParties();
+    render();
+  } catch (e) {
+    console.error(e);
+  }
+}
 // === Components ===
 
 /** Party name that shows more details about the party when clicked */
@@ -98,7 +124,7 @@ function PartyForm() {
     Name:
     <input name = "name" required />
   </label>
-  
+
   <label>
     Description:
     <input name = "description" required />
@@ -150,6 +176,14 @@ function SelectedParty() {
   if (!selectedParty) {
     const $p = document.createElement("p");
     $p.textContent = "Please select a party to learn more.";
+
+    const $deleteBtn = document.createElement("button");
+    $deleteBtn.textContent = "Delete Party";
+    $deleteBtn.addEventListener("click", async () => {
+      await deleteParty(selectedParty.id);
+    });
+
+    $party.appendChild($deleteBtn);
     return $p;
   }
 
